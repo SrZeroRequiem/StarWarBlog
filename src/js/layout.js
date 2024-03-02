@@ -4,7 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
-import { Single } from "./views/single";
+import { Singlep } from "./views/singlep.js";
+import { Singlec } from "./views/singlec.js";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -17,15 +18,14 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div className="d-flex flex-column">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
+						<Route path="/" element={<Home/>}/>
+						<Route path="/singlep/:theid" element={<Singlep />}/>
+						<Route path="/singlec/:theid" element={<Singlec />}/>
 					</Routes>
 					<Footer />
 				</ScrollToTop>
