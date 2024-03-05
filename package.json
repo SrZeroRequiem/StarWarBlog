@@ -6,26 +6,20 @@
 	"version": "1.0.1",
 	"description": "",
 	"main": "index.js",
+	"homepage": "http://SrZeroRequiem.github.io/StarWarBlog"
 	"scripts": {
 		"start": "webpack-dev-server --config webpack.dev.js --host 0.0.0.0 --port 3000",
 		"build": "webpack --config webpack.prod.js",
-		"deploy": "node deploy-to-github.js"
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"author": {
-		"name": "Alejandro Sanchez",
-		"url": "http://alesanchezr.com/"
+		"name": "Bruno Mura",
 	},
-	"contributors": [
-		{
-			"name": "Alejandro Sanchez",
-			"url": "http://alesanchezr.com/"
-		},
-		{
-			"name": "Ignacio Cordoba",
-			"url": "http://github.com/nachovz"
-		}
-	],
 	"license": "ISC",
+	"repository": {
+		"url" : "git+https://github.com/SrZeroRequiem/StarWarBlog.git"
+	},	
 	"devDependencies": {
 		"@babel/cli": "^7.16.0",
 		"@babel/core": "^7.16.0",
