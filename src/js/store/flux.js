@@ -15,6 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			planets: [],
 			characters: [],
+			starships: [],
+			favoritesstarships: [],
 			favoritesplanets: [],
 			favoritescharacters: [],
 			numberfavorites: 0,
@@ -27,56 +29,101 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
-				fetch("https://swapi.dev/api/planets/")
+				fetch("https://www.swapi.tech/api/planets?page=1&limit=100")
 					.then(res => res.json())
 					.then(data => setStore({ planets: data.results }))
 					.catch(err => console.error(err));
 
-				fetch("https://swapi.dev/api/people/")
+				fetch("https://www.swapi.tech/api/people?page=1&limit=100")
 					.then(res2 => res2.json())
 					.then(data2 => setStore({ characters: data2.results }))
 					.catch(err2 => console.error(err2));
+				fetch("https://www.swapi.tech/api/starships?page=1&limit=100")
+					.then(res2 => res2.json())
+					.then(data2 => setStore({ starships: data2.results }))
+					.catch(err2 => console.error(err2));
 			},
-			changeColor: (index, color) => {
-				//get the store
+			isFavoriteP: (index) => {
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
-
-			setlistFavoritesPlanets(val) {
+				const favorites = store.favoritesplanets.findIndex(obj => obj.index == index)
+				if (favorites === -1) {
+					return false
+				} else {
+					return true
+				}
+			}
+			,
+			isFavoriteC: (index) => {
 				const store = getStore();
-				let newfavoritelist = [...store.favoritesplanets, val];
-				setStore({ favoritesplanets: [...store.favoritesplanets, val] });
-			},
-
-			setlistFavoritesCharacters(val) {
+				const favorites = store.favoritescharacters.findIndex(obj => obj.index == index)
+				if (favorites === -1) {
+					return false
+				} else {
+					return true
+				}
+			}
+			,
+			isFavoriteS: (index) => {
 				const store = getStore();
-				setStore({ favoritescharacters: [...store.favoritescharacters, val] });
+				const favorites = store.favoritesstarships.findIndex(obj => obj.index == index)
+				if (favorites === -1) {
+					return false
+				} else {
+					return true
+				}
+			}
+			,
+			stringFormat: (string) => {
+				if (string === "n/a") {
+					return "Undefined"
+				} else if (string === undefined) {
+					return "Cargando..."
+				}
+				else {
+					let coma = string.indexOf(",")
+					if (coma === -1) {
+						return string[0].toUpperCase() + string.slice(1);
+					} else {
+						return string[0].toUpperCase() + string.slice(1, coma + 1) + string[coma + 2].toUpperCase() + string.slice(coma + 3);
+					}
+				}
+			},
+			setlistFavoritesPlanets(name, uid) {
+				const store = getStore();
+				setStore({ favoritesplanets: [...store.favoritesplanets, { title: name, index: uid }] });
 			},
 
-			removelistFavoritesPlanets(val) {
+			setlistFavoritesCharacters(name, uid) {
+				const store = getStore();
+				setStore({ favoritescharacters: [...store.favoritescharacters, { title: name, index: uid }] });
+			},
+			setlistFavoritesStarships(name, uid) {
+				const store = getStore();
+				setStore({ favoritesstarships: [...store.favoritesstarships, { title: name, index: uid }] });
+			},
+
+			removelistFavoritesPlanets(index) {
 				const store = getStore();
 				setStore({
 					favoritesplanets: store.favoritesplanets.filter(item => {
-						return item !== val.toString();
+						return item.index !== index;
 					})
 				});
 			},
 
-			removelistFavoritesCharacters(val) {
+			removelistFavoritesCharacters(index) {
 				const store = getStore();
 				setStore({
 					favoritescharacters: store.favoritescharacters.filter(item => {
-						return item !== val.toString();
+						return item.index !== index;
+					})
+				});
+			},
+			removelistFavoritesStarships(index) {
+				const store = getStore();
+				setStore({
+					favoritesstarships: store.favoritesstarships.filter(item => {
+						return item.index !== index;
 					})
 				});
 			},
@@ -88,34 +135,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			lessFavorites() {
 				const store = getStore();
 				setStore({ numberfavorites: store.numberfavorites - 1 });
-			},
-
-			setplanetindex(val) {
-				const store = getStore();
-				setStore({ planetsindex: [...store.planetsindex, val] });
-			},
-
-			removePlanetsindex(val) {
-				const store = getStore();
-				setStore({
-					planetsindex: store.planetsindex.filter(item => {
-						return item !== val;
-					})
-				});
-			},
-
-			setcharacterindex(val) {
-				const store = getStore();
-				setStore({ characterindex: [...store.characterindex, val] });
-			},
-
-			removecharacterindex(val) {
-				const store = getStore();
-				setStore({
-					characterindex: store.characterindex.filter(item => {
-						return item !== val;
-					})
-				});
 			}
 		}
 	};

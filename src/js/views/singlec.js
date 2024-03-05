@@ -6,49 +6,40 @@ import { Context } from "../store/appContext";
 export const Singlec = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-
-	let buttonstyles = {
-		backgroundColor: "goldenrod",
-		borderColor: "black",
-		color: "black"
-	};
-
-	let imagearraycharacters = [
-		"https://img.culturacolectiva.com/cdn-cgi/image/f=auto,w=1600,q=80,fit=contain/featured_image/2018/09/24/1537835785388/luke-skywalker.jpg",
-		"https://i1.wp.com/wipy.tv/wp-content/uploads/2020/09/pierna-plateada-de-c3po.jpg?fit=1000%2C600&ssl=1",
-		"https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/05/03/15885120366138.jpg",
-		"https://i2.wp.com/wipy.tv/wp-content/uploads/2020/06/darth-vader-es-el-sith-mas-poderoso.jpg?fit=1000%2C600&ssl=1",
-		"https://lafuerzanoticias.files.wordpress.com/2018/07/leia-organa-1-tall.jpg?w=1536&h=768&crop=1",
-		"https://cdn.lanetaneta.com/wp-content/uploads/2020/07/Star-Wars-Por-que-Owen-Lars-no-reconocio-a-C-3PO-780x470.jpg",
-		"https://lumiere-a.akamaihd.net/v1/images/databank_shmiskywalkerlars_01_169_7449f0a8.jpeg?region=341%2C0%2C878%2C878",
-		"https://cdnb.artstation.com/p/assets/images/images/001/727/465/large/paul-beards-r5-d4-final-preview-01.jpg?1451853235",
-		"https://pbs.twimg.com/media/EouvaiYVoAAmmQ0.jpg",
-		"https://i.blogs.es/cd0fbf/ewan/1366_2000.jpeg"
-	];
+	const [details, setDetails] = useState({})
+	const [desc, setDesc] = useState("Loading...")
+	function getDetails(url) {
+		return fetch(url)
+			.then(res => res.json())
+	}
+	useEffect(() => {
+		async function fetchingD() {
+			const result = await getDetails(`https://www.swapi.tech/api/people/${params.theid}`)
+			await setDesc(result.result.description)
+			await setDetails(result.result.properties)
+		}
+		fetchingD()
+	}, [])
 	return (
-		<div className="jumbotron">
+		<div className="jumbotron bg-black ">
 			{" "}
 			<div className="container">
-				<div className="row">
-					<div className="col-6 ">
-						<img src={imagearraycharacters[params.theid]} className="card-img-top" height="400px" />
-					</div>
-					<div className="col-6">
-						<h1 className="d-flex justify-content-center">{store.characters[params.theid].name}</h1>
-						<p className="text-center mt-5">
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-							been the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-							galley of type and scrambled it to make a type specimen book. It has survived not only five
-							centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-							It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-							passages, and more recently with desktop publishing software like Aldus PageMaker including
-							versions of Lorem Ipsum.
-						</p>
-					</div>
+				<div className="row justify-content-center">
+					<main className="single-card col-10 row p-0">
+						<figure className="col-7 p-0 m-0 ">
+							<img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/characters/${(params.theid).toString()}.jpg`} className="img-card" onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"} />
+						</figure>
+						<article className="col-5 menu p-4">
+							<h1 className="text-start h4 card-text-title">{details.name}</h1>
+							<p className="text-start mt-4 card-text">
+								{desc}
+							</p>
+						</article>
+					</main>
 				</div>
 			</div>
-			<hr className="my-4 bg-warning" />
-			<div className="container">
+			<hr className="bg-light my-3" />
+			<section className="container">
 				<div className="row">
 					<div className="col-2 text-center">
 						<h3>Name</h3>
@@ -71,32 +62,25 @@ export const Singlec = props => {
 				</div>
 				<div className="row">
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].name}</h5>
+						<h5 className="mt-3 text-capitalize">{details.name}</h5>
 					</div>
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].height}</h5>
+						<h5 className="mt-3 text-capitalize">{details.height}CM</h5>
 					</div>
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].hair_color}</h5>
+						<h5 className="mt-3 text-capitalize">{details.hair_color}</h5>
 					</div>
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].skin_color}</h5>
+						<h5 className="mt-3 text-capitalize">{details.skin_color}</h5>
 					</div>
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].birth_year}</h5>
+						<h5 className="mt-3 text-capitalize">{details.birth_year}</h5>
 					</div>
 					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{store.characters[params.theid].gender}</h5>
+						<h5 className="mt-3 text-capitalize">{details.gender}</h5>
 					</div>
 				</div>
-			</div>
-			<div className="container">
-				<Link to="/">
-					<button className="btn btn-primary btn-lg mt-4 ml-4" href="#" role="button" style={buttonstyles}>
-						Back home
-					</button>
-				</Link>
-			</div>
+			</section>
 		</div>
 	);
 };

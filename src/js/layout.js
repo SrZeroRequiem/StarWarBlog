@@ -6,6 +6,7 @@ import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Singlep } from "./views/singlep.js";
 import { Singlec } from "./views/singlec.js";
+import { Singles } from "./views/singles.js";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -23,9 +24,11 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<Home/>}/>
-						<Route path="/singlep/:theid" element={<Singlep />}/>
-						<Route path="/singlec/:theid" element={<Singlec />}/>
+						<Route path="/" element={<Home />} />
+						<Route path="/home" element={<Home />} />
+						<Route path="/singlep/:theid" element={<Singlep />} />
+						<Route path="/singlec/:theid" element={<Singlec />} />
+						<Route path="/singles/:theid" element={<Singles />} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>
