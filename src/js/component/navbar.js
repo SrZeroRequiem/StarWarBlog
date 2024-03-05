@@ -107,7 +107,7 @@ export const Navbar = props => {
 						<a href="./#characters" className="me-1 navHover">
 							<i class="fa-solid fa-user"> Characters</i>
 						</a>
-						<a href="./#vehicles" className="me-1 navHover">
+						<a href="./#starships" className="me-1 navHover">
 							<i class="fa-solid fa-rocket"> Starships</i>
 						</a>
 					</div>

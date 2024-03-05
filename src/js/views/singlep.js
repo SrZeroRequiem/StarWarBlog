@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Singlep = props => {
@@ -19,7 +19,7 @@ export const Singlep = props => {
 			await setDesc(result.result.description)
 			await setDetails(result.result.properties)
 		}
-		fetchingD()
+		fetchingD().then()
 	}, [])
 	return (
 		<div className="jumbotron bg-black">

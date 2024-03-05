@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Singles = props => {
+export const Singles = () => {
+    // eslint-disable-next-line no-unused-vars
     const { store, actions } = useContext(Context);
     const params = useParams();
     const [details, setDetails] = useState({})
@@ -18,7 +19,7 @@ export const Singles = props => {
             await setDesc(result.result.description)
             await setDetails(result.result.properties)
         }
-        fetchingD()
+        fetchingD().then()
     }, [])
     return (
         <div className="jumbotron bg-black ">

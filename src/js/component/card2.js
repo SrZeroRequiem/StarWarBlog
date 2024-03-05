@@ -1,11 +1,11 @@
-import React, { Component, useState, useContext, useEffect } from "react";
+import React, {useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Card2(props) {
-	const [iconcolor, seticonColor] = useState("rgb(90,92,93)");
+	const [iconColor, setIconColor] = useState("rgb(90,92,93)");
 	const { store, actions } = useContext(Context);
 	const [isFavorite, setFavorite] = useState(false)
 	const [index, setIndex] = useState(props.index);
@@ -19,18 +19,18 @@ export function Card2(props) {
 			const result = await getDetails(props.url)
 			await setDetails(result.result.properties)
 		}
-		fetchingD()
-	}, [])
+		fetchingD().then()
+	}, [props.url])
 	useEffect(() => {
 		setFavorite(actions.isFavoriteC(index))
 		if (isFavorite === true) {
-			seticonColor("white");
+			setIconColor("white");
 		} else {
-			seticonColor("rgb(90,92,93)");
+			setIconColor("rgb(90,92,93)");
 		}
-	})
+	}, [actions, index, isFavorite])
 	let icolor = {
-		color: { iconcolor }.iconcolor
+		color: { iconcolor: iconColor }.iconcolor
 	}
 
 	return (
