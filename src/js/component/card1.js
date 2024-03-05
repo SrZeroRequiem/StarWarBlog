@@ -1,7 +1,6 @@
 import React, {useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "../../styles/home.css";
 import { Context } from "../store/appContext";
 
 export function Card1(props) {

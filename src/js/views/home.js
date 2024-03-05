@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../../styles/home.css";
 import { Card1 } from "../component/card1.js";
 import { Card2 } from "../component/card2.js";
 
 import { Context } from "../store/appContext";
-import { Card3 } from "../componenst/card3.js";
+import { Card3 } from "../component/card3.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);

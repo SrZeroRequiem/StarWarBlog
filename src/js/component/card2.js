@@ -1,6 +1,5 @@
 import React, {useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import "../../styles/home.css";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
