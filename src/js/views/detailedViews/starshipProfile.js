@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Singles = () => {
+export const StarshipProfile = () => {
     // eslint-disable-next-line no-unused-vars
     const { store, actions } = useContext(Context);
     const params = useParams();
@@ -86,6 +86,6 @@ export const Singles = () => {
     );
 };
 
-Singles.propTypes = {
+StarshipProfile.propTypes = {
     match: PropTypes.object
 };
