@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import {useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const StarshipProfile = () => {
     // eslint-disable-next-line no-unused-vars

@@ -6,15 +6,17 @@ import { Context } from "../store/appContext";
 export const Navbar = props => {
 	const { store, actions } = useContext(Context);
 
+
 	let navstyle = {
 		backgroundColor: "black"
 	};
 
 
 	return (
-		<header className="container-fluid p-3 border-bottom border-light pb-0" style={navstyle}>
+		<header className="container-fluid p-3 border-bottom border-light pb-0 navShow" style={navstyle}>
+
 			<div className="row justify-content-between flex-row px-5">
-				<div className="col-4 ps-6">
+				<div className="col-4 p-0">
 
 					<a href=" https://www.facebook.com/starwarsla">
 						<i className="fab fa-facebook fa-lg px-2" />
@@ -40,19 +42,19 @@ export const Navbar = props => {
 						/>
 					</Link>
 				</div>
-				<div className="col-3 d-flex justify-content-end">
+				<div className="col-3 d-flex justify-content-end p-0">
 					<Dropdown>
 						<Dropdown.Toggle id="dropdown-basic" className="">
-							<i class="fas fa-heart"></i>
-							<span> {store.numberfavorites} </span>
+							<i className="fas fa-heart"></i>
+							<span> {store.numberFavorites} </span>
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu className="menu">
 							<p className="text-center mb-1">Planets</p>
 							<hr className="bg-light mt-0" />
-							{store.favoritesplanets.map((item, index) => {
+							{store.favoritesPlanets.map((item, index) => {
 								return (
-									<Link to={"/singlep/" + store.favoritesplanets[index].index} key={index}>
+									<Link to={"/singlep/" + store.favoritesPlanets[index].index} key={index}>
 										<Dropdown.Item href="" className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={(e) => {
@@ -65,9 +67,9 @@ export const Navbar = props => {
 							})}
 							<p className="text-center mb-1">Characters</p>
 							<hr className="bg-light mt-2" />
-							{store.favoritescharacters.map((item, index) => {
+							{store.favoritesCharacters.map((item, index) => {
 								return (
-									<Link to={"/singlec/" + store.favoritecharacter[index].index} key={index}>
+									<Link to={"/singlec/" + store.favoritesCharacters[index].index} key={index}>
 										<Dropdown.Item href="#" className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={(e) => {
@@ -80,9 +82,9 @@ export const Navbar = props => {
 							})}
 							<p className="text-center mb-1">Starships</p>
 							<hr className="bg-light mt-2" />
-							{store.favoritesstarships.map((item, index) => {
+							{store.favoritesStarships.map((item, index) => {
 								return (
-									<Link to={"/singlec/" + store.favoritesstarships[index].index} key={index}>
+									<Link to={"/singlec/" + store.favoritesStarships[index].index} key={index}>
 										<Dropdown.Item href="#" className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={(e) => {
@@ -98,8 +100,8 @@ export const Navbar = props => {
 				</div>
 			</div>
 			<nav>
-				<div className="row justify-content-start flex-row px-5 pb-0">
-					<div className="col-4 ps-6">
+				<div className="row justify-content-start flex-row px-5">
+					<div className="col p-0">
 
 						<a href="./#planets" className="me-1 navHover">
 							<i class="fa-solid fa-earth-oceania"> Planets</i>

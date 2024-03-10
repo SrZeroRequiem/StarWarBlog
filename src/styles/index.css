@@ -7,7 +7,7 @@
 .bg-black{
     background-color: black;
 }
-a,button,i,span{
+a,button,i,span, .favoriteItem{
     background-color: transparent;
     color: rgb(90,92,93);
     border: none;
@@ -18,13 +18,13 @@ a,button,i,span{
 button::after{
     content: none!important;    
 }
-i:hover, button:hover, a:hover{
+i:hover, button:hover, a:hover, .favoriteItem:hover, .h5{
     text-shadow: 1px 0 10px;
     color: white!important;
     background-color: transparent!important;
 }
 button:focus{
-    box-shadow: 0!important;
+    box-shadow: none!important;
 }
 .delete-button:hover{
     color: rgb(254,100,100)!important;
@@ -48,10 +48,10 @@ button:focus{
     object-position: 100% 20%;
 }
 .img-card-mini{
-    width: 100%;
     height: 300px;
     object-fit: cover;
     object-position: top;
+    aspect-ratio: 137/150;
 }
 .single-card{
     margin-top: 60px;
@@ -71,8 +71,7 @@ button:focus{
 }
 
 
-
-/*       ScrollBar 1        */
+/*       ScrollBar 1 */
 
 .scrollbar::-webkit-scrollbar {
     width: 10px;
@@ -89,4 +88,26 @@ button:focus{
     width: 30px;
     background-color: white;
 }
-  
+.navHide{
+    display: flex;
+}
+@media (min-width: 992px){
+    .navHide{
+        display: none;
+    }
+}
+.navShow{
+    display: none;
+}
+@media (min-width: 992px){
+    .navShow{
+        display: block;
+    }
+}
+.detail-tab-item{
+    border-right: 1px solid #48494A
+}
+.detail-tab-text{
+    display: inline-block;
+    color: #B5B7B7;
+}

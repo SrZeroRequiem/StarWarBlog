@@ -1,37 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
+import {Link, useParams} from "react-router-dom";
+import {Context} from "../../store/appContext.js";
 
-export const PlanetProfile = props => {
-	const { store, actions } = useContext(Context);
-
+export const PlanetProfile = () => {
 	const params = useParams();
-	const [details, setDetails] = useState({})
-	const [desc, setDesc] = useState("Loading...")
-	function getDetails(url) {
-		return fetch(url)
-			.then(res => res.json())
-	}
+	const {store,actions} = useContext(Context);
+	const detailsRef = useRef(undefined)
+	const [details, setDetails] = useState(detailsRef.current)
+	const desc = "A planet"
 	useEffect(() => {
-		async function fetchingD() {
-			const result = await getDetails(`https://www.swapi.tech/api/planets/${params.theid}`)
-			await setDesc(result.result.description)
-			await setDetails(result.result.properties)
-		}
-		fetchingD().then()
-	}, [])
+			setDetails(actions.getPlanet(params.theid));
+			detailsRef.current = details
+		},
+		[actions, details, params.theid])
 	return (
 		<div className="jumbotron bg-black">
 			{" "}
-			<div className="container">
+			<div className="container-fluid mb-5">
 				<div className="row justify-content-center">
-					<main className="single-card col-10 row p-0">
-						<figure className="col-7 p-0 m-0 ">
-							<img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/planets/${(Number(params.theid)).toString()}.jpg`} className="img-card" onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"} />
+					<main className="single-card col-11 row p-0">
+						<figure className="col-8 p-0 m-0 ">
+							<img
+								src={`https://raw.github
+								usercontent.com/tbone849/star-wars-guide/master/build/assets/img/planets/${(Number(params.theid)).toString()}.jpg`}
+								className="img-card"
+								onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"}
+								alt={"Image of " + (details!==undefined?details.name:"Loading")}/>
 						</figure>
-						<article className="col-5 menu p-4">
-							<h1 className="text-start h4 card-text-title">{details.name}</h1>
+						<article className="col-4 menu p-4">
+							<h1 className="text-start h4 card-text-title">{(details!==undefined?details.name:"Loading")}</h1>
 							<p className="text-start mt-4 card-text">
 								{desc}
 							</p>
@@ -39,50 +37,49 @@ export const PlanetProfile = props => {
 					</main>
 				</div>
 			</div>
-			<hr className="bg-light my-3" />
-			<section className="container">
-				<div className="row">
-					<div className="col-2 text-center">
-						<h3>Name</h3>
-					</div>
-					<div className="col-2 text-center">
-						<h3>Climate</h3>
-					</div>
-					<div className="col-2 text-center">
-						<h3>Terrain</h3>
-					</div>
-					<div className="col-2 text-center">
-						<h3>Population</h3>
-					</div>
-					<div className="col-2 text-center">
-						<h3>Gravity</h3>
-					</div>
-					<div className="col-2 text-center">
-						<h3>Rotation</h3>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.name}</h5>
-					</div>
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.climate}</h5>
-					</div>
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.terrain}</h5>
-					</div>
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.population} Habitantes</h5>
-					</div>
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.gravity}</h5>
-					</div>
-					<div className="col-2 text-center">
-						<h5 className="mt-3 text-capitalize">{details.rotation_period} Hours</h5>
-					</div>
+			<section className="container-fluid px-5">
+				<div className="d-flex justify-content-center w-100">
+					{details!==undefined?<div className="row flex-row flex-nowrap w-100">
+						<div className="col-2 detail-tab-item">
+							<div className="h5">Appearances</div>
+							{details["films"] !== undefined ? details["films"].map((film) => {
+								return <p className="ms-1 mb-1"><Link
+									to={"/films/" + film.split('/')[5]}>{actions.getFilm(film.split('/')[5]).title}</Link>
+								</p>;
+							}) : "Loading"}
+						</div>
+						<div className="col-2 detail-tab-item">
+							<div className="h5">Residents</div>
+							{details["residents"] !== undefined ? details["residents"].map((res) => {
+								return <p className="ms-1 mb-1"><Link
+									to={'/characters/' + res.split('/')[5]}>{actions.getCharacter(res.split('/')[5]).name}</Link>
+								</p>;
+							}) : "Loading"}
+						</div>
+						<div className="col detail-tab-item">
+							<div className="h5">Population</div>
+							<p className="ms-1 mb-1">{new Intl.NumberFormat().format(details["population"])}</p>
+						</div>
+						<div className="col detail-tab-item">
+							<div className="h5">Rotation</div>
+							<p className="ms-1 mb-1">{details["rotation_period"] + " Hours"}</p>
+						</div>
+						<div className="col detail-tab-item">
+							<div className="h5">Orbit</div>
+							<p className="ms-1 mb-1">{details["orbital_period"] + " Days"}</p>
+						</div>
+						<div className="col detail-tab-item">
+							<div className="h5">Terrain</div>
+							<p className="ms-1 mb-1">{actions.stringFormat(details["terrain"])}</p>
+						</div>
+						<div className="col">
+							<div className="h5">Gravity</div>
+							<p className="ms-1 mb-1">{details["gravity"]!==undefined?details["gravity"].split(" ")[0] + " G":"Loading"}</p>
+						</div>
+					</div>:"Loading"}
 				</div>
 			</section>
-		</div >
+		</div>
 	);
 };
 

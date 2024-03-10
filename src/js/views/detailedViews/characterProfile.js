@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes, {func} from "prop-types";
-import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
+import { Context } from "../../store/appContext";
 import {useParams} from "react-router-dom";
 
 export const CharacterProfile = props => {
