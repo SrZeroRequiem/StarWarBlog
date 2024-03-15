@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link} from "react-router-dom";
 
-export function Card3(props) {
+export function CardStarhip(props) {
     const [iconColor, setIconColor] = useState("white");
     const {actions} = useContext(Context);
     const [isFavorite, setFavorite] = useState(false)
@@ -23,14 +23,14 @@ export function Card3(props) {
     }
 
     return (
-        <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div className="card border-0">
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div className="card border-0 h-100">
                 <img src={props.image} className="img-card-mini" height="200px" onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"} alt={"Image of "+details.name}/>
-                <div className="card-body menu" style={{aspectRatio: 273.83/141}}>
-                    <h5 className="card-title" style={{aspectRatio: 241.83/48}}>{details.name}</h5>
+                <div className="card-body menu d-flex flex-column justify-content-between">
+                    <h5 className="card-title" style={{aspectRatio: 447.33/24}}>{details.name}</h5>
                     {details["cost_in_credits"] !== undefined ? <div><p className="card-text mb-1"> {"Price: " + actions.stringFormat("" + details["cost_in_credits"])}</p></div> : <p className="card-text">Loading..</p>}
-                    <div className="d-flex flex-row justify-content-between align-content-center">
-                        <Link to={"/starships/" + (props.index)} className="mt-1">
+                    <div className="d-flex flex-row justify-content-between align-content-center ">
+                        <Link to={"/starship/" + (props.index)} className="mt-1">
                             Learn more!
                         </Link>
                         <button>
@@ -56,7 +56,7 @@ export function Card3(props) {
     );
 }
 
-Card3.propTypes = {
+CardStarhip.propTypes = {
     title: PropTypes.string,
     image: PropTypes.string,
     cost: PropTypes.string,

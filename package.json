@@ -1,12 +1,13 @@
 {
   "name": "app",
   "version": "0.1.0",
-  "homepage": "https://srzerorequiem.github.io/StarWarBlog/",
+  "homepage": "https://srzerorequiem.github.io/starwarsblog/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.4.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "gh-pages": "^6.1.1"
   }
 }

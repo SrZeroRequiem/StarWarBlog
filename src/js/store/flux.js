@@ -1,3 +1,4 @@
+const swapiURL = process.env.REACT_APP_SWAPI
 const getState = ({getStore, getActions, setStore}) => {
     return {
         store: {
@@ -20,6 +21,7 @@ const getState = ({getStore, getActions, setStore}) => {
             favoritesStarships: [],
             favoritesPlanets: [],
             favoritesCharacters: [],
+            favoritesFilms: [],
             numberFavorites: 0,
             planetsIndex: [],
             characterIndex: []
@@ -29,12 +31,23 @@ const getState = ({getStore, getActions, setStore}) => {
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
             },
+            getNumberOfPages(array){
+                let arrayPages = []
+                let pageNumber = 1
+                for (let i = 0; i < array.length; i = i +16) {
+                    arrayPages.push(pageNumber)
+                    pageNumber++
+                }
+                return arrayPages
+            }
+            ,
             loadSomeData: () => {
                 const store = getStore();
                 let planets = store.planets;
-                let characters = store.characters
-                let starships = store.starships
-                let films = store.films
+                let characters = store.characters;
+                let starships = store.starships;
+                let films = store.films;
+
                 function fetchPlanets(url) {
                     fetch(url)
                         .then(res => res.json())
@@ -48,7 +61,7 @@ const getState = ({getStore, getActions, setStore}) => {
                         .catch(err => console.error(err));
                 }
 
-                fetchPlanets("http://localhost:3001/planets");
+                fetchPlanets(`${swapiURL}/planets`);
 
                 function fetchCharacters(url) {
                     fetch(url)
@@ -62,7 +75,9 @@ const getState = ({getStore, getActions, setStore}) => {
                         })
                         .catch(err => console.error(err));
                 }
-                fetchCharacters("http://localhost:3001/people")
+
+                fetchCharacters(`${swapiURL}/people`);
+
                 function fetchStarships(url) {
                     fetch(url)
                         .then(res => res.json())
@@ -75,7 +90,7 @@ const getState = ({getStore, getActions, setStore}) => {
                         })
                         .catch(err => console.error(err));
                 }
-                fetchStarships("http://localhost:3001/starships")
+                fetchStarships(`${swapiURL}/starships`);
 
                 function fetchFilms(url) {
                     fetch(url)
@@ -89,41 +104,41 @@ const getState = ({getStore, getActions, setStore}) => {
                         })
                         .catch(err => console.error(err));
                 }
-                fetchFilms("http://localhost:3001/films")
+                fetchFilms(`${swapiURL}/films`)
 
             },
-            getFilm: (id)=>{
-                const store = getStore()
-                const data = store.films
-                const item = data.filter((obj)=>{
-                    return obj.pk === id
-                })
-                return item[0]
+            getFilm: (id) => {
+                const store = getStore();
+                const data = store.films;
+                const item = data.filter((obj) => {
+                    return obj.pk === Number(id);
+                });
+                return item[0] !== undefined ? item[0] : "404";
             },
-            getCharacter:(id)=>{
-                const store = getStore()
-                const data = store.characters
-                const item = data.filter((obj)=>{
-                    return obj.pk === id
-                })
-                return item[0]
+            getCharacter: (id) => {
+                const store = getStore();
+                const data = store.characters;
+                const item = data.filter((obj) => {
+                    return obj.pk === Number(id);
+                });
+                return item[0] !== undefined ? item[0] : "404";
             },
-            getPlanet: (id)=>{
-                const store = getStore()
-                const data = store.planets
+            getPlanet: (id) => {
+                const store = getStore();
+                const data = store.planets;
                 let item = data.filter((obj) => {
-                    return obj.pk === Number(id)
-                })
-                console.log(item)
-                return item[0]
+                    return obj.pk === Number(id);
+                });
+                return item[0] !== undefined ? item[0] : "404";
             },
-            getStarship: (id)=>{
-                const store = getStore()
-                const data = store.starships
-                const item = data.filter((obj)=>{
-                    return obj.pk === id
-                })
-                return item[0]
+            getStarship: (id) => {
+                const store = getStore();
+                const data = store.starships;
+                const item = data.filter((obj) => {
+                    return obj.pk === Number(id);
+                });
+                console.log(item[0].pilots)
+                return item[0] !== undefined ? item[0] : "404";
             }
             ,
             isFavoriteP: (index) => {
@@ -141,6 +156,11 @@ const getState = ({getStore, getActions, setStore}) => {
             isFavoriteS: (index) => {
                 const store = getStore();
                 const favorites = store.favoritesStarships.findIndex(obj => obj.index === index);
+                return favorites !== -1;
+            },
+            isFavoriteF: (index) => {
+                const store = getStore();
+                const favorites = store.favoritesFilms.findIndex(obj => obj.index === index);
                 return favorites !== -1;
             }
             ,
@@ -171,6 +191,10 @@ const getState = ({getStore, getActions, setStore}) => {
                 const store = getStore();
                 setStore({favoritesStarships: [...store.favoritesStarships, {title: name, index: uid}]});
             },
+            setlistFavoritesFilms(name, uid) {
+                const store = getStore();
+                setStore({favoritesFilms: [...store.favoritesFilms, {title: name, index: uid}]});
+            },
 
             removelistFavoritesPlanets(index) {
                 const store = getStore();
@@ -197,6 +221,14 @@ const getState = ({getStore, getActions, setStore}) => {
                     })
                 });
             },
+            removelistFavoritesFilms(index) {
+                const store = getStore();
+                setStore({
+                    favoritesFilms: store.favoritesFilms.filter(item => {
+                        return item.index !== index;
+                    })
+                });
+            },
             sumFavorites() {
                 const store = getStore();
                 setStore({numberFavorites: store.numberFavorites + 1});
@@ -205,6 +237,17 @@ const getState = ({getStore, getActions, setStore}) => {
             lessFavorites() {
                 const store = getStore();
                 setStore({numberFavorites: store.numberFavorites - 1});
+            },
+            romanize(num) {
+                var digits = String(+num).split(""),
+                    key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+                        "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+                        "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+                    roman = "",
+                    i = 3;
+                while (i--)
+                    roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+                return Array(+digits.join("") + 1).join("M") + roman;
             }
         }
     };

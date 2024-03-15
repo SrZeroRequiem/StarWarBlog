@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export function Card1(props) {
+export function CardPlanet(props) {
 	const [iconColor, setIconColor] = useState("rgb(90,92,93)");
 	const {actions } = useContext(Context);
 	const [isFavorite, setFavorite] = useState(false)
@@ -24,14 +24,16 @@ export function Card1(props) {
 
 
 	return (
-		<article className="col-12 col-sm-6 col-md-4 col-lg-3">
-			<div className="card border-0">
-				<img src={props.image} className="card-img-top img-card-mini" onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"} alt={"Image of "+details.name}/>
-				<div className="card-body menu" style={{aspectRatio: 273.83/129}}>
+		<article className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+			<div className="card border-0 h-100">
+				<img src={props.image} className="card-img-top img-card-mini"
+					 onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"}
+					 alt={"Image of " + details.name}/>
+				<div className="card-body menu d-flex flex-column justify-content-between">
 					<h5 className="card-title">{props.title}</h5>
 					<p className="card-text"> {details["population"] !== undefined ? "Population: " + details["population"] : "Loading.."}</p>
 					<div className="d-flex flex-row justify-content-between align-content-center">
-						<Link to={"/planets/" + (props.index)} className="mt-1">
+						<Link to={"/planet/" + (props.index)} className="mt-1">
 							Learn more!
 						</Link>
 						<button>
@@ -41,11 +43,11 @@ export function Card1(props) {
 									if (!isFavorite) {
 										actions.sumFavorites();
 										actions.setlistFavoritesPlanets(props.title, index);
-										setFavorite(actions.isFavoriteP(index))
+										setFavorite(actions.isFavoriteP(index));
 									} else {
 										actions.lessFavorites();
 										actions.removelistFavoritesPlanets(index);
-										setFavorite(actions.isFavoriteP(index))
+										setFavorite(actions.isFavoriteP(index));
 									}
 								}}
 							/>
@@ -57,7 +59,7 @@ export function Card1(props) {
 	);
 }
 
-Card1.propTypes = {
+CardPlanet.propTypes = {
 	title: PropTypes.string,
 	details: PropTypes.object,
 	index: PropTypes.number,
