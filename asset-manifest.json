@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/StarWarBlog/static/css/main.17ffe1e9.css",
-    "main.js": "/StarWarBlog/static/js/main.0c3efaab.js",
-    "index.html": "/StarWarBlog/index.html",
-    "main.17ffe1e9.css.map": "/StarWarBlog/static/css/main.17ffe1e9.css.map",
-    "main.0c3efaab.js.map": "/StarWarBlog/static/js/main.0c3efaab.js.map"
+    "main.css": "/starwarsblog/static/css/main.8d85e3ca.css",
+    "main.js": "/starwarsblog/static/js/main.951f14c6.js",
+    "index.html": "/starwarsblog/index.html",
+    "main.8d85e3ca.css.map": "/starwarsblog/static/css/main.8d85e3ca.css.map",
+    "main.951f14c6.js.map": "/starwarsblog/static/js/main.951f14c6.js.map"
   },
   "entrypoints": [
-    "static/css/main.17ffe1e9.css",
-    "static/js/main.0c3efaab.js"
+    "static/css/main.8d85e3ca.css",
+    "static/js/main.951f14c6.js"
   ]
 }
