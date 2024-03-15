@@ -3,33 +3,43 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Singlep } from "./views/singlep.js";
-import { Singlec } from "./views/singlec.js";
-import { Singles } from "./views/singles.js";
+import { PlanetProfile } from "./views/detailedViews/planetProfile.js";
+import { CharacterProfile } from "./views/detailedViews/characterProfile.js";
+import { StarshipProfile } from "./views/detailedViews/starshipProfile.js";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
+import { NavbarResponsive } from "./component/navbarResposive";
+import {Navbar} from "./component/navbar";
 import { Footer } from "./component/footer";
+import {FilmProfile} from "./views/detailedViews/filmProfile";
+import {CharacterStore} from "./views/shopView/characterStore";
+import {FilmStore} from "./views/shopView/filmStore";
+import {StarshipStore} from "./views/shopView/starshipStore";
+import {PlanetsStore} from "./views/shopView/planetStore";
 
 const Layout = () => {
-	const basename = process.env.BASENAME || "";
+	const basename = process.env.REACT_APP_BASENAME;
 
 	return (
-		<div className="d-flex flex-column">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
+					<Navbar/>
+					<NavbarResponsive />
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/home" element={<Home />} />
-						<Route path="/singlep/:theid" element={<Singlep />} />
-						<Route path="/singlec/:theid" element={<Singlec />} />
-						<Route path="/singles/:theid" element={<Singles />} />
+						<Route path="/planets/:page" element={<PlanetsStore />} />
+						<Route path="/planet/:theid" element={<PlanetProfile />} />
+						<Route path="/characters/:page" element={<CharacterStore/>}/>
+						<Route path="/character/:theid" element={<CharacterProfile />} />
+						<Route path="/starships/:page" element={<StarshipStore />} />
+						<Route path="/starship/:theid" element={<StarshipProfile />} />
+						<Route path="/films/:page" element={<FilmStore />} />
+						<Route path="/film/:theid" element={<FilmProfile />} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
-		</div>
 	);
 };
 
