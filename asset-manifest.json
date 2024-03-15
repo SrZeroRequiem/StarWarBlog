@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/StarWarBlo/static/css/main.8d85e3ca.css",
-    "main.js": "/StarWarBlo/static/js/main.951f14c6.js",
+    "main.js": "/StarWarBlo/static/js/main.49ba9ad2.js",
     "index.html": "/StarWarBlo/index.html",
     "main.8d85e3ca.css.map": "/StarWarBlo/static/css/main.8d85e3ca.css.map",
-    "main.951f14c6.js.map": "/StarWarBlo/static/js/main.951f14c6.js.map"
+    "main.49ba9ad2.js.map": "/StarWarBlo/static/js/main.49ba9ad2.js.map"
   },
   "entrypoints": [
     "static/css/main.8d85e3ca.css",
-    "static/js/main.951f14c6.js"
+    "static/js/main.49ba9ad2.js"
   ]
 }
