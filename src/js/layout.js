@@ -18,10 +18,8 @@ import {StarshipStore} from "./views/shopView/starshipStore";
 import {PlanetsStore} from "./views/shopView/planetStore";
 
 const Layout = () => {
-	const basename = process.env.REACT_APP_BASENAME;
-
 	return (
-			<BrowserRouter basename={basename}>
+			<BrowserRouter>
 				<ScrollToTop>
 					<Navbar/>
 					<NavbarResponsive />

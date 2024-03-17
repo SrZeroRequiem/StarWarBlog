@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
 
 export function CardProfile(props) {

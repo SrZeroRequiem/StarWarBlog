@@ -14,7 +14,8 @@ export const NavbarResponsive = () =>{
                 <div className="container-fluid d-flex flex-nowrap m-0 p-0 w-100 justify-content-between">
                 <button className="navbar-toggler ps-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarMenu" aria-controls="navbarMenu"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation" onClick={()=>{
+                    document.querySelector("#navbarFavorite").classList.remove('show') }}>
                     <span className="navbar-toggler-icon">
                         <i className="fa-solid fa-bars"></i>
                     </span>
@@ -28,7 +29,9 @@ export const NavbarResponsive = () =>{
                 </Link>
                 <button className="navbar-toggler pe-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarFavorite" aria-controls="navbarFavorite"
-                        aria-expanded="false" aria-label="Toggle favorites">
+                        aria-expanded="false" aria-label="Toggle favorites" onClick={()=>{
+                            document.querySelector("#navbarMenu").classList.remove('show')
+                }}>
                     <span className="navbar-toggler-icon">
                         <i className="fa-solid fa-heart"></i>
                     </span>
@@ -40,76 +43,76 @@ export const NavbarResponsive = () =>{
                             <i className="fa-solid fa-film"> Films</i>
                             <hr className="bg-light h1"/>
                             <div>
-                                {store.favoritesFilms.map((item, index) => {
+                                {store.favoritesFilms.length>0?store.favoritesFilms.map((item, index) => {
                                     return (
-                                        <Link to={"/planets/" + store.favoritesFilms[index].index} key={index}
+                                        <div key={index}
                                               className="d-flex justify-content-between">
-                                            <p className="m-0 favoriteItem">{item.title}</p>
+                                            <Link  to={"/film/" + store.favoritesFilms[index].index} className="m-0 favoriteItem">{item.title}</Link>
                                             <i className="fas fa-circle-minus delete-button d-flex align-items-center"
                                                onClick={() => {
                                                    actions.lessFavorites();
                                                    actions.removelistFavoritesFilms(item.index);
                                                }}/>
-                                        </Link>
+                                        </div>
                                     );
-                                })}
+                                }): <span>No films added</span>}
                             </div>
                         </li>
                         <li className="nav-item">
                             <i className="fa-solid fa-earth-oceania"> Planets</i>
                             <hr className="bg-light h1"/>
                             <div>
-                                {store.favoritesPlanets.map((item, index) => {
+                                {store.favoritesPlanets.length>0?store.favoritesPlanets.map((item, index) => {
                                     return (
-                                        <Link to={"/planets/" + store.favoritesPlanets[index].index} key={index}
-                                              className="d-flex justify-content-between">
-                                            <p className="m-0 favoriteItem">{item.title}</p>
+                                        <div key={index}
+                                             className="d-flex justify-content-between">
+                                            <Link to={"/planet/" + store.favoritesPlanets[index].index}  className="m-0 favoriteItem">{item.title}</Link>
                                             <i className="fas fa-circle-minus delete-button d-flex align-items-center"
                                                onClick={() => {
                                                    actions.lessFavorites();
                                                    actions.removelistFavoritesPlanets(item.index);
                                                }}/>
-                                        </Link>
+                                        </div>
                                     );
-                                })}
+                                }):<span>No planets added</span>}
                             </div>
                         </li>
                         <li className="nav-item mt-2">
                             <i className="fa-solid fa-user"> Characters</i>
                             <hr className="bg-light h1"/>
                             <div>
-                                {store.favoritesCharacters.map((item, index) => {
+                                {store.favoritesCharacters.length>0?store.favoritesCharacters.map((item, index) => {
                                     return (
-                                        <Link to={"/characters/" + store.favoritesCharacters[index].index} key={index}
+                                        <div  key={index}
                                               className="d-flex justify-content-between">
-                                            <p className="m-0 favoriteItem">{item.title}</p>
+                                            <Link to={"/character/" + store.favoritesCharacters[index].index} className="m-0 favoriteItem">{item.title}</Link>
                                             <i className="fas fa-circle-minus delete-button d-flex align-items-center"
                                                onClick={() => {
                                                    actions.lessFavorites();
                                                    actions.removelistFavoritesPlanets(item.index);
                                                }}/>
-                                        </Link>
+                                        </div>
                                     );
-                                })}
+                                }):<span>No characters added</span>}
                             </div>
                         </li>
                         <li className="nav-item mt-2">
                             <i className="fa-solid fa-rocket"> Starships</i>
                             <hr className="bg-light h1"/>
                             <div>
-                                {store.favoritesStarships.map((item, index) => {
+                                {store.favoritesStarships.length>0?store.favoritesStarships.map((item, index) => {
                                     return (
-                                        <Link to={"/starships/" + store.favoritesStarships[index].index} key={index}
+                                        <div key={index}
                                               className="d-flex justify-content-between">
-                                            <p className="m-0 favoriteItem">{item.title}</p>
+                                            <Link to={"/starship/" + store.favoritesStarships[index].index} className="m-0 favoriteItem">{item.title}</Link>
                                             <i className="fas fa-circle-minus delete-button d-flex align-items-center"
                                                onClick={() => {
                                                    actions.lessFavorites();
                                                    actions.removelistFavoritesPlanets(item.index);
                                                }}/>
-                                        </Link>
+                                        </div>
                                     );
-                                })}
+                                }):<span>No starships added</span>}
                             </div>
                         </li>
                     </ul>

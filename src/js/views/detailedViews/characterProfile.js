@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext, useRef} from "react";
 import PropTypes from "prop-types";
 import {Context} from "../../store/appContext";
 import {Link, useParams} from "react-router-dom";
+import ScrollableParagraph from "../../component/scrollableParagraph";
 
 export const CharacterProfile = () => {
     const params = useParams();
@@ -26,9 +27,9 @@ export const CharacterProfile = () => {
                     </figure>
                     <article className="col-lg-4 col-12 menu p-4 h-100">
                         <h1 className="text-start h4 card-text-title">{details !== undefined ? details.name : "Loading"}</h1>
-                        <p className="text-start mt-4 card-text">
-                            {details !== undefined ? (details.description !== null ? details.description : "A character from Star Wars.") : "Loading"}
-                        </p>
+                        <ScrollableParagraph desc={details !== undefined ? (details.description !== null ? details.description : "A character from Star Wars.") : "Loading"}/>
+
+
                     </article>
                 </main>
             </section>

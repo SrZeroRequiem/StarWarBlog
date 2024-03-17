@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export function CardPlanet(props) {
 	const [iconColor, setIconColor] = useState("rgb(90,92,93)");

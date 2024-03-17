@@ -1,10 +1,10 @@
 import React, {useContext } from "react";
-import { CardPlanet } from "../component/cardPlanet.js";
-import { CardProfile } from "../component/cardProfile.js";
+import { CardPlanet } from "../component/cards/cardPlanet.js";
+import { CardProfile } from "../component/cards/cardProfile.js";
 
 import { Context } from "../store/appContext";
-import { CardStarhip } from "../component/cardStarhip.js";
-import {CardFilm} from "../component/cardFilm";
+import { CardStarhip } from "../component/cards/cardStarhip.js";
+import {CardFilm} from "../component/cards/cardFilm";
 import {Link} from "react-router-dom";
 
 export const Home = () => {

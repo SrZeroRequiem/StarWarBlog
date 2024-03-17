@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Link, useParams} from "react-router-dom";
 import {Context} from "../../store/appContext";
-import {CardFilm} from "../../component/cardFilm";
+import {CardFilm} from "../../component/cards/cardFilm";
 
 export const FilmStore = () => {
     const params = useParams()

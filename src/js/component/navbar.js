@@ -55,7 +55,7 @@ export const Navbar = () => {
 							<hr className="bg-light mt-0" />
 							{store["favoritesFilms"].map((item, index) => {
 								return (
-									<Link to={"/planets/" + store.favoritesFilms[index].index} key={index} className="mb-1">
+									<Link to={"/film/" + store.favoritesFilms[index].index} key={index} className="mb-1">
 										<Dropdown.Item className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={() => {
@@ -70,7 +70,7 @@ export const Navbar = () => {
 							<hr className="bg-light mt-0" />
 							{store["favoritesPlanets"].map((item, index) => {
 								return (
-									<Link to={"/planets/" + store.favoritesPlanets[index].index} key={index} className="mb-1">
+									<Link to={"/planet/" + store.favoritesPlanets[index].index} key={index} className="mb-1">
 										<Dropdown.Item className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={() => {
@@ -85,7 +85,7 @@ export const Navbar = () => {
 							<hr className="bg-light mt-2" />
 							{store["favoritesCharacters"].map((item, index) => {
 								return (
-									<Link to={"/characters/" + store.favoritesCharacters[index].index} key={index} className="mb-1">
+									<Link to={"/character/" + store.favoritesCharacters[index].index} key={index} className="mb-1">
 										<Dropdown.Item className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={() => {
@@ -100,7 +100,7 @@ export const Navbar = () => {
 							<hr className="bg-light mt-2" />
 							{store["favoritesStarships"].map((item, index) => {
 								return (
-									<Link to={"/starships/" + store.favoritesStarships[index].index} key={index} className="mb-1">
+									<Link to={"/starship/" + store.favoritesStarships[index].index} key={index} className="mb-1">
 										<Dropdown.Item className="d-flex justify-content-between ">
 											<p className="m-0">{item.title}</p>
 											<i className="fas fa-circle-minus delete-button d-flex align-items-center" onClick={() => {

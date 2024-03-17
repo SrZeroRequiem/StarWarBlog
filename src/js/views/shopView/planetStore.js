@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Link, useParams} from "react-router-dom";
 import {Context} from "../../store/appContext";
-import {CardPlanet} from "../../component/cardPlanet";
+import {CardPlanet} from "../../component/cards/cardPlanet";
 
 export const PlanetsStore = () => {
     const params = useParams()
