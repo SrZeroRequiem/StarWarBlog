@@ -42,7 +42,7 @@ export const FilmProfile = () => {
                                     (
                                         <span className="ms-1 mb-1">
                                                 <Link
-                                                    to={"/characters/" + c}>{(store.characters.filter((obj) => obj.pk === c))[0].name}</Link>
+                                                    to={"/character/" + c}>{(store.characters.filter((obj) => obj.pk === c))[0].name}</Link>
                                                 ,
                                             </span>
                                     ))}
@@ -53,7 +53,7 @@ export const FilmProfile = () => {
                             <div className="d-flex flex-lg-column flex-wrap">
                                 {details.starships.map((s) => {
                                     return <span className="ms-1 mb-1"><Link
-                                        to={"/starships/" + s}>{((store.starships.filter((obj) => obj.pk === s))[0].name).toString()}</Link>
+                                        to={"/starship/" + s}>{((store.starships.filter((obj) => obj.pk === s))[0].name).toString()}</Link>
                                     ,
                                 </span>;
                                 })}
@@ -70,7 +70,7 @@ export const FilmProfile = () => {
                             <div className="h5">Planets</div>
                             {details.planets.map((p) => {
                                 return <p className="ms-1 mb-1"><Link
-                                    to={"/planets/" + p}>{(store.planets.filter((obj) => obj.pk === p))[0].name}</Link>
+                                    to={"/planet/" + p}>{(store.planets.filter((obj) => obj.pk === p))[0].name}</Link>
                                 </p>;
                             })}
                         </div>

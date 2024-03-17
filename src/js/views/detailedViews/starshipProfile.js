@@ -14,7 +14,7 @@ export const StarshipProfile = () => {
                     let pilot = store.characters.filter((obj) => Number(obj.pk) === Number(p));
                     if (pilot.length>0){
                         return <span className="ms-1 mb-1">
-                                                <Link to={"/characters/" + p}>{pilot[0].name}</Link>
+                                                <Link to={"/character/" + p}>{pilot[0].name}</Link>
                                                 ,
                                                 </span>;
                     }
@@ -63,7 +63,7 @@ export const StarshipProfile = () => {
                                     if (starshipFilms.length === 1) {
                                         return <span className="ms-1 mb-1">
                                             <Link
-                                                to={"/films/" + film.pk}>{"Star Wars: " + film.title + ` (Episode ${actions.romanize(film.episode_id)})`}</Link>
+                                                to={"/film/" + film.pk}>{"Star Wars: " + film.title + ` (Episode ${actions.romanize(film.episode_id)})`}</Link>
                                             ,
                                         </span>;
                                     } else return null;

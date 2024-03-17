@@ -43,7 +43,7 @@ export const PlanetProfile = () => {
                                     if (char.homeworld === details.pk) {
                                         return (
                                             <span className="ms-1 mb-1">
-                                            <Link to={"/films/"}>{char.name}</Link>
+                                            <Link to={"/film/"}>{char.name}</Link>
                                             ,
                                         </span>
                                         );
@@ -59,7 +59,7 @@ export const PlanetProfile = () => {
                                     console.log(film);
                                     if (filmInPlanet.length === 1) {
                                         return <span className="ms-1 mb-1">
-                                        <Link to={"/films/"}>{film.title}</Link>
+                                        <Link to={"/film/"}>{film.title}</Link>
                                         ,
                                     </span>;
                                     } else return null;

@@ -44,7 +44,7 @@ export const CharacterProfile = () => {
                                     if (filmInCharacter.length === 1) {
                                         return <span className="ms-1 mb-1">
                                         <Link
-                                            to={"/films/" + film.pk}>{"Star Wars: " + film.title + ` (Episode ${actions.romanize(film.episode_id)})`}</Link>
+                                            to={"/film/" + film.pk}>{"Star Wars: " + film.title + ` (Episode ${actions.romanize(film.episode_id)})`}</Link>
                                         ,
                                     </span>;
                                     } else return null;
@@ -60,7 +60,7 @@ export const CharacterProfile = () => {
                                         const pilotStarship = starships["pilots"].filter((pilot) => pilot === details.pk);
                                         if (pilotStarship.length === 1) {
                                             return <span className="ms-1 mb-1">
-                                            <Link to={"/starships/" + starships.pk}>{starships.name}</Link>
+                                            <Link to={"/starship/" + starships.pk}>{starships.name}</Link>
                                             ,
                                         </span>;
                                         } else return null;
@@ -74,7 +74,7 @@ export const CharacterProfile = () => {
                             {store.planets.map((planet) => {
                                 if (planet.pk === details.pk) {
                                     return <span className="ms-1 mb-1"><Link
-                                        to={"/planets/" + planet.pk}>{planet.name}</Link>
+                                        to={"/planet/" + planet.pk}>{planet.name}</Link>
                                     </span>;
                                 } else return null;
 
