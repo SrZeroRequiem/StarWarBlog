@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Link, useParams} from "react-router-dom";
 import {Context} from "../../store/appContext";
-import {CardStarhip} from "../../component/cards/cardStarhip";
+import {CardStarship} from "../../component/cards/cardStarship";
 
 export const StarshipStore = () => {
     const params = useParams()
@@ -18,7 +18,7 @@ export const StarshipStore = () => {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {store.starships.slice(start, end).map((item, index) => {
                     return (
-                        <CardStarhip
+                        <CardStarship
                             key={(item.pk)}
                             title={item.name}
                             details={item}

@@ -1,35 +1,44 @@
-import React, {useState, useEffect, useContext, useRef} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import {Context} from "../../store/appContext";
-import {Link, useParams} from "react-router-dom";
-import ScrollableParagraph from "../../component/scrollableParagraph";
+import { Context } from "../../store/appContext";
+import { Link, useParams } from "react-router-dom";
 
 export const CharacterProfile = () => {
+    const { store, actions } = useContext(Context);
     const params = useParams();
-    const {store, actions} = useContext(Context);
-    const detailsRef = useRef(undefined);
-    const [details, setDetails] = useState(detailsRef.current);
+    const [details, setDetails] = useState(undefined);
+
     useEffect(() => {
-            setDetails(actions.getCharacter(params.theid));
-            detailsRef.current = details;
-        },
-        [actions, details, params.theid]);
+        const fetchCharacterDetails = async () => {
+            try {
+                const characterDetails = await actions.getEntityById(params.theid, "characters");
+                setDetails(characterDetails);
+            } catch (error) {
+                console.error("Error fetching character details:", error);
+            }
+        };
+
+        fetchCharacterDetails()
+            .then(() => console.log("Character details loaded"))
+            .catch((error) => console.error("Error loading character details:", error));
+    }, [actions, params.theid]);
     return details !== "404" ?
         <div className="container-fluid px-4">
             <section className="d-flex justify-content-center mt-5 p-0">
                 <main className="single-card col-12 row px-0">
                     <figure className="col-lg-8 col-12 p-0 m-0 d-flex" style={{height: "-webkit-fill-available"}}>
                         <img
-                            src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/characters/${(params.theid).toString()}.jpg`}
+                            src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/characters/${params.theid}.jpg`}
                             className="img-card"
-                            onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"}
-                            alt={"Image of " + (details !== undefined ? details.name : "Loading")}/>
+                            onError={(e) => (e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg")}
+                            alt={"Image of " + (details !== undefined ? details.name : "Loading")}
+                        />
                     </figure>
                     <article className="col-lg-4 col-12 menu p-4 h-100">
                         <h1 className="text-start h4 card-text-title">{details !== undefined ? details.name : "Loading"}</h1>
-                        <ScrollableParagraph desc={details !== undefined ? (details.description !== null ? details.description : "A character from Star Wars.") : "Loading"}/>
-
-
+                        <p className="text-start mt-4 card-text">
+                            {details!==undefined?(details.description !== null ? details.description : "A planet."):"Loading"}
+                        </p>
                     </article>
                 </main>
             </section>

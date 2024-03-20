@@ -10,7 +10,7 @@ export function CardProfile(props) {
     const index = props.index;
     const details = props.details;
     useEffect(() => {
-        setFavorite(actions.isFavoriteC(index));
+        setFavorite(actions.isFavorite("characters",index));
         if (isFavorite === true) {
             setIconColor("white");
         } else {
@@ -45,13 +45,13 @@ export function CardProfile(props) {
                                     className="fas fa-star" style={color}
                                     onClick={() => {
                                         if (!isFavorite) {
-                                            actions.sumFavorites();
-                                            actions.setlistFavoritesCharacters(props.title, index);
-                                            setFavorite(actions.isFavoriteC(index));
+                                            actions.updateNumberFavorites(1);
+                                            actions.toggleFavorite("characters",props.title, index);
+                                            setFavorite(actions.isFavorite("characters",index));
                                         } else {
-                                            actions.lessFavorites();
-                                            actions.removelistFavoritesCharacters(index);
-                                            setFavorite(actions.isFavoriteC(index));
+                                            actions.updateNumberFavorites(-1);
+                                            actions.toggleFavorite("characters",props.title, index);
+                                            setFavorite(actions.isFavorite("characters",index));
                                         }
                                     }}
                                 />

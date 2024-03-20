@@ -18,7 +18,7 @@ const injectContext = (PassedComponent) => {
 
 		useEffect(() => {
 			console.log("Loading data")
-			state.actions.loadSomeData();
+			state.actions.loadData().then(r => {});
 
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, []);

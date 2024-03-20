@@ -3,7 +3,7 @@ import { CardPlanet } from "../component/cards/cardPlanet.js";
 import { CardProfile } from "../component/cards/cardProfile.js";
 
 import { Context } from "../store/appContext";
-import { CardStarhip } from "../component/cards/cardStarhip.js";
+import { CardStarship } from "../component/cards/cardStarship.js";
 import {CardFilm} from "../component/cards/cardFilm";
 import {Link} from "react-router-dom";
 
@@ -89,7 +89,7 @@ export const Home = () => {
 			<section className="row h-auto scrollbar" style={over} id="starships">
 				{store.starships.slice(0,5).map((item, index) => {
 					return (
-						<CardStarhip
+						<CardStarship
 							key={(item.pk)}
 							title={item.name}
 							details={item}
