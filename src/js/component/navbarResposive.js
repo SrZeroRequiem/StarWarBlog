@@ -135,10 +135,15 @@ export const NavbarResponsive = () =>{
                             </Link>
                         </li>
                         <li className="nav-item">
-                        <Link className="nav-link" to="/starships/1">
+                            <Link className="nav-link" to="/starships/1">
                                 <i className="fa-solid fa-rocket"> Starships</i>
                             </Link>
                         </li>
+                        {/*<li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/login">
+                                <i className="fa-solid fa-user"> Log in</i>
+                            </Link>
+                        </li>*/}
                     </ul>
                 </div>
             </div>

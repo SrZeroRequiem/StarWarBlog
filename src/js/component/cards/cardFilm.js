@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {Context} from "../../store/appContext";
@@ -22,13 +22,12 @@ export function CardFilm(props) {
     };
 
 
-    return (
-        <article className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+    return (<article className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
             <div className="card border-0 h-100">
                 <Link to={"/film/" + props.index}><img src={props.image} className="card-img-top img-card-mini"
                                                        onError={(e) => e.target.src = "https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/big-placeholder.jpg"}
                                                        alt={"Image of " + details.name}/></Link>
-                <div className="card-body menu row flex-column justify-content-between w-100">
+                <div className="card-body menu row flex-column justify-content-between w-100 mx-0">
                     <div className="p-0 m-0 col-4 w-100">
                         <h5 className="card-title" style={{aspectRatio: 447.33 / 24}}>{props.title}</h5>
                         <p className="card-text"> {details["episode_id"] !== undefined ? "Episode " + actions.romanize(details["episode_id"]) : "Loading.."}</p>
@@ -62,13 +61,9 @@ export function CardFilm(props) {
                     </div>
                 </div>
             </div>
-        </article>
-    );
+        </article>);
 }
 
 CardFilm.propTypes = {
-    title: PropTypes.string,
-    details: PropTypes.object,
-    index: PropTypes.number,
-    image: PropTypes.string
+    title: PropTypes.string, details: PropTypes.object, index: PropTypes.number, image: PropTypes.string
 };
