@@ -62,10 +62,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             loadData: async () => {
                 const { fetchData } = getActions();
                 const endpoints = {
-                    planets: "https://starwarsblog.es/api/planets",
-                    characters: "https://starwarsblog.es/api/people",
-                    starships: "https://starwarsblog.es/api/starships",
-                    films: "https://starwarsblog.es/api/films"
+                    planets: "https://swapi-express-ezccmwhyd-srzerorequiems-projects.vercel.app/api/planets",
+                    characters: "https://swapi-express-ezccmwhyd-srzerorequiems-projects.vercel.app/api/people",
+                    starships: "https://swapi-express-ezccmwhyd-srzerorequiems-projects.vercel.app/api/starships",
+                    films: "https://swapi-express-ezccmwhyd-srzerorequiems-projects.vercel.app/api/films"
                 };
                 for (const [type, url] of Object.entries(endpoints)) {
                     await fetchData(url, type);
